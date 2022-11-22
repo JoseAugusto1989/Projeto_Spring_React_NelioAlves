@@ -1,12 +1,12 @@
-import { NavigateBefore } from "@mui/icons-material";
 import { useState } from "react";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 import nameIcon from "../../assets/img/Add-User.png";
 import emailIcon from "../../assets/img/Message.png";
 import passwordIcon from "../../assets/img/Password.png";
 import userAuth from "../../hooks/userAuth";
-import useAuth from "../../hooks/userAuth";
 import ButtonLogin from "./ButtonLogin";
 import InputLogin from "./Input";
 
@@ -38,6 +38,8 @@ const TextContainerLeft = styled.h2`
   font-size: 16px;
   line-height: 50px;
   text-align: center;
+  padding: 20px;
+  color: white;
 `;
 
 const ContainerLeft = styled.div`
@@ -45,7 +47,7 @@ const ContainerLeft = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 40%;
   text-align: center;
   padding: 60px;
   border-radius: 8px 0 0 8px;
@@ -70,7 +72,7 @@ const ContainerRight = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 70%;
   text-align: center;
   padding: 60px;
   border-radius: 0 8px 8px 0;
@@ -97,6 +99,7 @@ const LetterData = styled.h2`
   line-height: 22px;
   color: #aaa9a9;
   text-align: center;
+  margin-bottom: 40px;
 `;
 
 const DivTest = styled.div`
@@ -110,28 +113,39 @@ const LetterLogo = styled.h1`
   text-align: center;
 `;
 
-const Login = () => {
-  const signin  = userAuth();
+const schema = yup
+  .object({
+    name: yup.string().required("O nome é obrigatório"),
+    email: yup.string().email("Digite um email válido").required("O email é obrigatório"),
+    password: yup.string().min(6, "A senha deve ter no mínimo 6 dígitos").required("A senha é obrigatória"),
+  }).required();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+const Login = () => {
+ // const { register, handleSubmit, watch, formState: {errors}, } = useForm({ resolver: yupResolver(schema) });
+  const handleRegistration = (data: any) => console.log(data);
+
+  const { signin } = userAuth();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLogin = () => {
     if (!email || !password) {
-      setError("Por favor preencha todos os campos")
-      return;
-
-    }
-    const res = signin(email, password)
-
-    if (res) {
-      setError(res)
+      setError("Por favor preencha todos os campos");
       return;
     }
-    //NavigateBefore("/home")
 
-  }
+    if (signin) {
+      const res = signin(email, password);
+
+      if (res) {
+        setError(res);
+        return;
+      }
+      //NavigateBefore("/home")
+    }
+  };
 
   return (
     <ContainerMain>
@@ -148,15 +162,32 @@ const Login = () => {
       <ContainerRight color="white">
         <LetterContainer>Crie sua conta</LetterContainer>
         <LetterData>Preencha seus dados</LetterData>
+      
+        <form onSubmit={(handleRegistration)}>
+          <InputLogin
+            icon={nameIcon}
+            type="text"
+            
+            placeholder="Nome"
+          />
 
-        <InputLogin icon={nameIcon} type="text" placeholder="Nome" />
+          <InputLogin
+            icon={emailIcon}
+            type="email"
+            placeholder="Email"
+            
+          />
 
-        <InputLogin icon={emailIcon} type="email" placeholder="Email" />
-
-        <InputLogin icon={passwordIcon} type="password" placeholder="Senha" />
+          <InputLogin
+            icon={passwordIcon}
+            type="password"
+            placeholder="Senha"
+            
+          />
+        </form>
 
         <DivTest>
-          <ButtonLogin>CADASTRAR</ButtonLogin>
+          <ButtonLogin onClick={handleLogin}>CADASTRAR</ButtonLogin>
         </DivTest>
       </ContainerRight>
     </ContainerMain>
@@ -164,3 +195,10 @@ const Login = () => {
 };
 
 export default Login;
+function setName(value: string) {
+  throw new Error("Function not implemented.");
+}
+function yupResolver(schema: any): import("react-hook-form").Resolver<import("react-hook-form").FieldValues, any> | undefined {
+  throw new Error("Function not implemented.");
+}
+

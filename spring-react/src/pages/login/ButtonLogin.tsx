@@ -15,6 +15,7 @@ const Button = styled.button`
   text-align: center;
   color: #ffffff;
   padding: 10px 50px;
+  cursor: pointer; 
 
  // width: ${(p: {width?: number | string}) => p.width}px;
 `;
