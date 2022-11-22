@@ -1,19 +1,18 @@
+import { NavigateBefore } from "@mui/icons-material";
+import { useState } from "react";
 import styled from "styled-components";
 
 import nameIcon from "../../assets/img/Add-User.png";
 import emailIcon from "../../assets/img/Message.png";
 import passwordIcon from "../../assets/img/Password.png";
+import userAuth from "../../hooks/userAuth";
+import useAuth from "../../hooks/userAuth";
 import ButtonLogin from "./ButtonLogin";
 import InputLogin from "./Input";
 
 const ContainerMain = styled.div`
-  //background-color: #e9e9e9;
   display: flex;
   text-align: center;
-  //width: 70%;
-  // background: #ffffff;
-  //border: 1px solid #000000;
-  //box-shadow: 2px 2px 10px;
   border-radius: 8px;
   padding: 180px 360px 0 360px;
 
@@ -60,7 +59,6 @@ const ContainerLeft = styled.div`
 
   @media (max-width: 600px) {
     display: inline;
-    //text-align: left;
     align-items: flex-start;
     border-radius: 8px 8px 0 0;
     width: 100%;
@@ -113,6 +111,28 @@ const LetterLogo = styled.h1`
 `;
 
 const Login = () => {
+  const signin  = userAuth();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = () => {
+    if (!email || !password) {
+      setError("Por favor preencha todos os campos")
+      return;
+
+    }
+    const res = signin(email, password)
+
+    if (res) {
+      setError(res)
+      return;
+    }
+    //NavigateBefore("/home")
+
+  }
+
   return (
     <ContainerMain>
       <ContainerLeft color="#484747">

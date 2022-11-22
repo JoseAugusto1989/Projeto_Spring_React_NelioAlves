@@ -2,19 +2,21 @@ import "./App.css";
 
 import React from "react";
 
+import { BrowserRouter } from "react-router-dom";
+
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 import Header from "./components/Header";
 import SalesCard from "./components/SalesCard";
-import Login from "./components/login/Login";
+import Login from "./pages/login/Login";
 
 function App() {
   return (
-    <div>
-      {/* <Login /> */}
+    <BrowserRouter>
+      <Login />
 
-      <ToastContainer />
+      {/* <ToastContainer />
       <Header />
       <main>
         <section id="sales">
@@ -22,8 +24,8 @@ function App() {
             <SalesCard />
           </div>
         </section>
-      </main>
-    </div>
+      </main> */}
+    </BrowserRouter>
   );
 }
 
