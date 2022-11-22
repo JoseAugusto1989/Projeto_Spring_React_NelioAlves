@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Button = styled.button`
   margin-top: 50px;
   box-sizing: border-box;
-  width: 220px;
+  width: 100%;
   height: 60px;
   background: #a3a3a3;
   border: 2px solid #ffffff;
@@ -14,8 +14,9 @@ const Button = styled.button`
   line-height: 22px;
   text-align: center;
   color: #ffffff;
+  padding: 10px 50px;
 
-  width: ${(p: {width?: number | string}) => p.width}px;
+ // width: ${(p: {width?: number | string}) => p.width}px;
 `;
 
 

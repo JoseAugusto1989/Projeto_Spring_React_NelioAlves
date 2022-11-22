@@ -1,27 +1,26 @@
-import { width } from "@mui/system";
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Input = styled.input`
   background: #e8e8e8;
   border: none;
-  //font-size: 20px;
- // height: 50px;
+  font-size: 20px;
+  width: 100%;
+  height: 60px;
   color: #747373;
   outline: 0;
   border-radius: 8px;
- // padding: 6px 10px 0 35px;
 `;
 
 const IconDesign = styled.div`
   background: #e8e8e8;
   border-radius: 8px;
   border: none;
-  //padding: 6px 6px 6px 8px;
+  display: flex;
+  margin: 10px
 `;
 
 const ImageIcon = styled.img`
-    //height: 26px;
-   // margin-left: 16px;
+    margin: 18px;
 `
 
 type Props = {
