@@ -1,30 +1,15 @@
-import "./App.css";
-
-import React from "react";
-
-import { BrowserRouter } from "react-router-dom";
-
-import { ToastContainer } from "react-toastify";
+import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-import Header from "./components/Header";
-import SalesCard from "./components/SalesCard";
-import Login from "./pages/login/Login";
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import RoutesApp from './routes';
 
 function App() {
   return (
     <BrowserRouter>
-      <Login />
-
-      {/* <ToastContainer />
-      <Header />
-      <main>
-        <section id="sales">
-          <div className="dsmeta-container">
-            <SalesCard />
-          </div>
-        </section>
-      </main> */}
+      <RoutesApp />
     </BrowserRouter>
   );
 }

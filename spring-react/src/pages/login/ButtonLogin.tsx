@@ -18,6 +18,8 @@ const Button = styled.button`
   cursor: pointer; 
 
  // width: ${(p: {width?: number | string}) => p.width}px;
+
+ type: ${(p: {type?: number | string | any}) => p.type}
 `;
 
 
